@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest{
 
-    private final String USER_EMAIL = "ruslantyshchenko99@gmail.com";
-    private final String USER_PASSWORD = "qNmepQpUA7tn$GW";
     private final String ERROR_MESSAGE_FOR_EMPTY_FIELD = "Mandatory field";
     private final String ERROR_MESSAGE_FOR_INVALID_CREDENTIALS = "Login failed";
 
@@ -58,7 +56,4 @@ public class LoginTest extends BaseTest{
                 "Login failed or create entry button was modified"
         );
     }
-
-
-
 }

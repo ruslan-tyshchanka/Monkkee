@@ -26,10 +26,6 @@ Entry creation/update:
 - User can modify text attribute
 - A link can be added to entry
 - A picture can be added to entry
-- User can select a paragraph format
-- User can select a font
-- User can select text size
-- Entry date/time can be modified
 - Entry can be edited
 
 Entry search:

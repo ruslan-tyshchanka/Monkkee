@@ -1,5 +1,6 @@
 package tests;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -11,10 +12,12 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.time.Duration;
 
+@Log4j2
 public class EntriesTest extends BaseTest{
 
     @Test(description = "Create an entry with formatting")
     public void createEntryWithFormatting() {
+        log.info("Creating an entry with some formatting options included");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -48,6 +51,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Verify tags CRUD")
     public void assignTags() {
+        log.info("Going through E2E flow with tags on Entry Creation page");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -77,6 +81,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Add link")
     public void addLinkToNewEntry() {
+        log.info("Adding a link to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -108,6 +113,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Cancel link creation")
     public void cancelLinkCreationInNewEntry() {
+        log.info("Cancelling link from a Link modal on Entry Creation page");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -142,6 +148,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Remove link")
     public void removeLinkFromNewEntry() {
+        log.info("Deleting a link which was added to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -179,6 +186,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Add a picture")
     public void addPicture() {
+        log.info("Adding an image to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -214,6 +222,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Cancel a picture")
     public void cancelPicture() {
+        log.info("Cancelling image attachment to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -252,6 +261,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Remove a picture")
     public void removePicture() {
+        log.info("Removing an image which was added to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -293,6 +303,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Expand a toolbar")
     public void expandToolbar() {
+        log.info("Expanding a toolbar");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -321,6 +332,7 @@ public class EntriesTest extends BaseTest{
 
         @Test(description = "Reduce a toolbar")
         public void reduceToolbar() {
+        log.info("Reducing a toolbar");
             loginPage.open();
             loginPage.login(USER_EMAIL, USER_PASSWORD);
             Assert.assertEquals(
@@ -360,6 +372,7 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "CRUD a simple entry")
     public void crudEntry() {
+        log.info("Performing a high-level E2E for an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(

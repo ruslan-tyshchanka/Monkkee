@@ -11,6 +11,10 @@ public class LoginPage extends BasePage {
     private final By LOGIN_BUTTON = By.cssSelector("[type=submit]");
     private final By LOGIN_ERROR_MESSAGE = By.cssSelector(".alert");
     final String FIELD_ERROR_MESSAGE_PATH = "//*[contains(text(), '%s')]/parent::*//*[contains(@class, 'help-block')]";
+    private final By PASSWORD_REMINDER_BUTTON = By.xpath("//a[@href='/account/password_reminder']");
+    private final By REGISTRATION_BUTTON = By.xpath("//a[@href='/account/registration']");
+    final String CHANGE_LANGUAGE_BUTTON = "//*[@class='language-switcher']/a[text()='%s']";
+
     public LoginPage (WebDriver driver) {
         super(driver);
     }
@@ -36,5 +40,26 @@ public class LoginPage extends BasePage {
         } else {
             return "Field is filled in";
         }
+    }
+
+    public void clickSendReminderButton() {
+        driver.findElement(PASSWORD_REMINDER_BUTTON).click();
+    }
+
+    public void clickRegisterButton() {
+        driver.findElement(REGISTRATION_BUTTON).click();
+    }
+
+    public String getPageTitle() {
+        return driver.findElement(PAGE_TITLE).getText();
+    }
+
+    public void switchLanguage(String targetLanguage) {
+        By LANGUAGE_BUTTON = By.xpath(String.format(CHANGE_LANGUAGE_BUTTON, targetLanguage));
+        driver.findElement(LANGUAGE_BUTTON).click();
+    }
+
+    public String getReminderButtonText() {
+        return driver.findElement(PASSWORD_REMINDER_BUTTON).getText();
     }
 }

@@ -13,6 +13,7 @@ import org.testng.annotations.Parameters;
 import pages.CreationPage;
 import pages.EntriesPage;
 import pages.LoginPage;
+import utils.PropertyReader;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -24,8 +25,10 @@ public class BaseTest {
     EntriesPage entriesPage;
     CreationPage creationPage;
 
-    final String USER_EMAIL = System.getenv("user");
-    final String USER_PASSWORD = System.getenv("password");;
+    final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
+    final String USER_PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("mnk.password"));
+
+
     @Parameters({"browser"})
     @BeforeMethod
     public void setup(@Optional("chrome") String browser, ITestContext testContext) {

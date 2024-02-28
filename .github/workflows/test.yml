@@ -19,8 +19,8 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      USER_EMAIL: ${{secrets.USER_EMAIL}}
-      USER_PASSWORD: ${{secrets.USER_PASSWORD}}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 11
@@ -30,4 +30,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean test -Duser=$USER_EMAIL -Dpassword=$USER_PASSWORD
+      run: mvn clean test -DsuiteXmlFile='src/test/resources/BVT.xml' -Duser=$USER_EMAIL -Dpassword=$USER_PASSWORD

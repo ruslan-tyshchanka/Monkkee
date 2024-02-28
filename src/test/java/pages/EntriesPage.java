@@ -14,4 +14,8 @@ public class EntriesPage extends BasePage{
     public boolean isCreateEntryButtonPresent () {
         return driver.findElement(CREATE_ENTRY_BUTTON).isDisplayed();
     }
+
+    public void goToCreationPage() {
+        driver.findElement(CREATE_ENTRY_BUTTON).click();
+    }
 }

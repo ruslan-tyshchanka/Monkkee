@@ -10,9 +10,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import pages.CreationPage;
 import pages.EntriesPage;
 import pages.LoginPage;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -20,11 +22,15 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     EntriesPage entriesPage;
+    CreationPage creationPage;
+
+    final String USER_EMAIL = System.getenv("user");
+    final String USER_PASSWORD = System.getenv("password");;
     @Parameters({"browser"})
     @BeforeMethod
     public void setup(@Optional("chrome") String browser, ITestContext testContext) {
         if (browser.equalsIgnoreCase("chrome")){
-            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().clearDriverCache().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
             options.addArguments("headless");
@@ -34,10 +40,11 @@ public class BaseTest {
             driver = new SafariDriver();
         }
         testContext.setAttribute("driver", driver);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         loginPage = new LoginPage(driver);
         entriesPage = new EntriesPage(driver);
+        creationPage = new CreationPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

@@ -7,6 +7,8 @@ public class EntriesPage extends BasePage{
 
     private final By CREATE_ENTRY_BUTTON = By.cssSelector("[title='Create an entry']");
     final String RECENT_ENTRY_RECORD = "(//*[text()='%s']/parent::*[@class='entry'])[1]";
+    private final By SETTINGS_BUTTON = By.xpath("//span[text()='Settings']");
+
 
     public EntriesPage(WebDriver driver) {
         super(driver);
@@ -28,5 +30,9 @@ public class EntriesPage extends BasePage{
     public void switchToRecentRecordWithText(String text) {
         By RECENT_ENTITY_TEXT = By.xpath(String.format(RECENT_ENTRY_RECORD, text));
         driver.findElement(RECENT_ENTITY_TEXT).click();
+    }
+
+    public void goToSettings() {
+        driver.findElement(SETTINGS_BUTTON).click();
     }
 }

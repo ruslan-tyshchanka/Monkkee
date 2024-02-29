@@ -14,6 +14,7 @@ import org.testng.annotations.Parameters;
 import pages.CreationPage;
 import pages.EntriesPage;
 import pages.LoginPage;
+import pages.SettingsPage;
 import utils.PropertyReader;
 
 import java.time.Duration;
@@ -25,6 +26,7 @@ public class BaseTest {
     LoginPage loginPage;
     EntriesPage entriesPage;
     CreationPage creationPage;
+    SettingsPage settingsPage;
     Faker faker;
 
     final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
@@ -52,6 +54,7 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         entriesPage = new EntriesPage(driver);
         creationPage = new CreationPage(driver);
+        settingsPage = new SettingsPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

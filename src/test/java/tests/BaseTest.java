@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +25,7 @@ public class BaseTest {
     LoginPage loginPage;
     EntriesPage entriesPage;
     CreationPage creationPage;
+    Faker faker;
 
     final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
     final String USER_PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("mnk.password"));
@@ -44,6 +46,8 @@ public class BaseTest {
         }
         testContext.setAttribute("driver", driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        faker = new Faker();
 
         loginPage = new LoginPage(driver);
         entriesPage = new EntriesPage(driver);

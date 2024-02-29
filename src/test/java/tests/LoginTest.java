@@ -104,5 +104,6 @@ public class LoginTest extends BaseTest{
                 loginPage.getReminderButtonText(),
                 expectedReminderText,
                 "Language wasn't updated"
-        );    }
+        );
+    }
 }

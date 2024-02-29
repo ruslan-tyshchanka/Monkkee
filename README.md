@@ -21,12 +21,14 @@ Home/Entries page:
 - Entries can be printed by one
 - Several entries can be printed at once
 
-Entry creation/update:
+Entry crud:
 - User can add text to entry
 - User can modify text attribute
 - A link can be added to entry
 - A picture can be added to entry
 - Entry can be edited
+- Entry can be deleted
+- Several entries can be deleted
 
 Entry search:
 - Entry can be searched by name

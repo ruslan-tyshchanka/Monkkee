@@ -32,14 +32,14 @@ public class EntriesTest extends BaseTest{
                 "Creation page is not opened"
         );
         creationPage.clickFormatIcon("Bold");
-        creationPage.writeEntry("Heading");
+        creationPage.writeEntry(faker.friends().character());
         creationPage.clickFormatIcon("Bold");
         creationPage.addNewline();
         creationPage.changeColor("Vivid Yellow");
-        creationPage.writeEntry("Coldplay");
+        creationPage.writeEntry(faker.country().capital());
         creationPage.changeColorToDefault();
         creationPage.addNewline();
-        creationPage.writeEntry("Back to normal");
+        creationPage.writeEntry(faker.friends().quote());
         creationPage.backToOverviewPage();
 
         Assert.assertEquals(
@@ -373,6 +373,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "CRUD a simple entry")
     public void crudEntry() {
         log.info("Performing a high-level E2E for an entry");
+        String entryText = faker.gameOfThrones().character();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -386,7 +387,7 @@ public class EntriesTest extends BaseTest{
                 true,
                 "Creation page is not opened"
         );
-        creationPage.writeEntry("Test Entry 1");
+        creationPage.writeEntry(entryText);
         creationPage.expandToolbar();
         Assert.assertEquals(
                 creationPage.findReduceToolbarIcon(),
@@ -401,11 +402,11 @@ public class EntriesTest extends BaseTest{
                 "Create entry button is not opened"
         );
         Assert.assertEquals(
-                entriesPage.findRecentEntryByText("Test Entry 1"),
+                entriesPage.findRecentEntryByText(entryText),
                 1,
                 "Saved entry is not found"
         );
-        entriesPage.switchToRecentRecordWithText("Test Entry 1");
+        entriesPage.switchToRecentRecordWithText(entryText);
         Assert.assertEquals(
                 creationPage.isCreationPageOpened(),
                 true,
@@ -426,11 +427,11 @@ public class EntriesTest extends BaseTest{
                 "Create entry button is not opened"
         );
         Assert.assertEquals(
-                entriesPage.findRecentEntryByText("UPD Test Entry 1"),
+                entriesPage.findRecentEntryByText("UPD "+entryText),
                 1,
                 "Saved entry is not found"
         );
-        entriesPage.switchToRecentRecordWithText("UPD Test Entry 1");
+        entriesPage.switchToRecentRecordWithText("UPD "+entryText);
         Assert.assertEquals(
                 creationPage.isCreationPageOpened(),
                 true,

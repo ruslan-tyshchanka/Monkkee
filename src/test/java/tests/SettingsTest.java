@@ -36,7 +36,7 @@ public class SettingsTest extends BaseTest{
                 true,
                 "Login failed or create entry button was modified"
         );
-        entriesPage.goToSettings();
+        entriesPage.clickOnHeader("Settings");
         settingsPage.selectSettingSection(sectionCode);
         settingsPage.waitForPageTitle(sectionTitle);
         Assert.assertEquals(

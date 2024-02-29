@@ -49,36 +49,6 @@ public class EntriesTest extends BaseTest{
         );
     }
 
-    @Test(description = "Verify tags CRUD")
-    public void assignTags() {
-        log.info("Going through E2E flow with tags on Entry Creation page");
-        loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Login failed or create entry button was modified"
-        );
-        entriesPage.goToCreationPage();
-        Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.addTag("Tag1");
-        Assert.assertEquals(
-                creationPage.findTagByName("Tag1"),
-                1,
-                "Tag wasn't assigned"
-        );
-        creationPage.removeTag("Tag1");
-        Assert.assertEquals(
-                creationPage.findTagByName("Tag1"),
-                0,
-                "Tag wasn't removed"
-        );
-    }
-
     @Test(description = "Add link")
     public void addLinkToNewEntry() {
         log.info("Adding a link to an entry");
@@ -442,6 +412,105 @@ public class EntriesTest extends BaseTest{
                 creationPage.isEntryDeleted(),
                 true,
                 "Entry is still displayed"
+        );
+    }
+
+    @Test(description = "Assign tag")
+    public void assignTags() {
+        log.info("Assigning a tag");
+        String tagName = faker.country().name()+" "+faker.food().fruit();
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.addTag(tagName);
+        Assert.assertEquals(
+                creationPage.findTagByName(tagName),
+                1,
+                "Tag wasn't assigned"
+        );
+    }
+
+    @Test(description = "Remove assigned tag")
+    public void removeTag() {
+        log.info("Removing assigned tag");
+        String tagName = faker.country().name()+" "+faker.food().fruit();
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.addTag(tagName);
+        Assert.assertEquals(
+                creationPage.findTagByName(tagName),
+                1,
+                "Tag wasn't assigned"
+        );
+        creationPage.removeTag(tagName);
+        Assert.assertEquals(
+                creationPage.findTagByName(tagName),
+                0,
+                "Tag wasn't removed"
+        );
+    }
+
+    @Test(description = "Verify assigned tag from Entries page")
+    public void verifyTag() {
+        log.info("Verifying assigned tag from Entries page");
+        String tagName = faker.country().name()+" "+faker.food().fruit();
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.addTag(tagName);
+        Assert.assertEquals(
+                creationPage.findTagByName(tagName),
+                1,
+                "Tag wasn't assigned"
+        );
+        creationPage.expandToolbar();
+        Assert.assertEquals(
+                creationPage.findReduceToolbarIcon(),
+                1,
+                "Toolbar is not expanded"
+        );
+        creationPage.saveEntry();
+        creationPage.backToOverviewPage();
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Create entry button is not opened"
+        );
+        Assert.assertEquals(
+                entriesPage.findRecentEntryByTag(tagName),
+                1,
+                "Entry with specified tag is not found"
         );
     }
 }

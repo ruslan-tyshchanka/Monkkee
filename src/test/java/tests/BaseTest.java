@@ -2,10 +2,13 @@ package tests;
 
 import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -32,7 +35,7 @@ public class BaseTest {
     final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
     final String USER_PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("mnk.password"));
 
-
+    final String BASE_URL = "https://monkkee.com";
     @Parameters({"browser"})
     @BeforeMethod
     public void setup(@Optional("chrome") String browser, ITestContext testContext) {
@@ -40,7 +43,7 @@ public class BaseTest {
             WebDriverManager.chromedriver().clearDriverCache().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
-            options.addArguments("headless");
+            //options.addArguments("headless");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("safari")) {
             WebDriverManager.safaridriver().setup();
@@ -58,7 +61,7 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    public void clearAndTearDown() {
         if(driver != null) {
             driver.quit();
         }

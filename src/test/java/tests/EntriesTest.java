@@ -513,4 +513,113 @@ public class EntriesTest extends BaseTest{
                 "Entry with specified tag is not found"
         );
     }
+
+    @Test(description = "Search a created entry")
+    public void searchForSingleEntry() {
+        log.info("Searching for a created entry with a single search result");
+        String entryText = faker.dog().breed();
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.expandToolbar();
+        creationPage.writeEntry(entryText);
+        Assert.assertEquals(
+                creationPage.findReduceToolbarIcon(),
+                1,
+                "Toolbar is not expanded"
+        );
+        creationPage.saveEntry();
+        creationPage.backToOverviewPage();
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Create entry button is not opened"
+        );
+        Assert.assertEquals(
+                entriesPage.findRecentEntryByText(entryText),
+                1,
+                "Saved entry is not found"
+        );
+        entriesPage.searchByText(entryText);
+        Assert.assertEquals(
+                entriesPage.getSearchedEntries(entryText),
+                1,
+                "Entry is not found"
+        );
+    }
+
+    @Test(description = "Search created entries")
+    public void searchForSeveralEntry() {
+        log.info("Searching for a created entry with several search results");
+        String entryText = faker.cat().breed();
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.expandToolbar();
+        creationPage.writeEntry(entryText+" 1");
+        Assert.assertEquals(
+                creationPage.findReduceToolbarIcon(),
+                1,
+                "Toolbar is not expanded"
+        );
+        creationPage.saveEntry();
+        creationPage.backToOverviewPage();
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Create entry button is not opened"
+        );
+        entriesPage.searchByText(entryText);
+        Assert.assertEquals(
+                entriesPage.getSearchedEntries(entryText),
+                1,
+                "Entry is not found"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.expandToolbar();
+        creationPage.writeEntry(entryText+" 2");
+        Assert.assertEquals(
+                creationPage.findReduceToolbarIcon(),
+                1,
+                "Toolbar is not expanded"
+        );
+        creationPage.saveEntry();
+        creationPage.backToOverviewPage();
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Create entry button is not opened"
+        );
+        entriesPage.searchByText(entryText);
+        Assert.assertEquals(
+                entriesPage.getSearchedEntries(entryText),
+                2,
+                "Entry is not found"
+        );
+    }
 }

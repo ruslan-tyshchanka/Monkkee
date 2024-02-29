@@ -10,10 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import pages.CreationPage;
 import pages.EntriesPage;
 import pages.LoginPage;
@@ -23,6 +20,7 @@ import utils.PropertyReader;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public class BaseTest {
 
     WebDriver driver;
@@ -42,8 +40,9 @@ public class BaseTest {
         if (browser.equalsIgnoreCase("chrome")){
             WebDriverManager.chromedriver().clearDriverCache().setup();
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--window-size=1920,1080");
             options.addArguments("start-maximized");
-            //options.addArguments("headless");
+            options.addArguments("headless");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("safari")) {
             WebDriverManager.safaridriver().setup();

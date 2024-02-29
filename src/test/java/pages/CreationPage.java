@@ -124,7 +124,9 @@ public class CreationPage extends BasePage {
 
     public void removePictureFromTextbox() { driver.findElement(ENTRY_TEXTBOX).sendKeys(Keys.BACK_SPACE); }
 
-    public void expandToolbar() { driver.findElement(EXPAND_TOOLBAR).click(); }
+    public void expandToolbar() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(EXPAND_TOOLBAR));
+        driver.findElement(EXPAND_TOOLBAR).click(); }
 
     public void reduceToolbar() { driver.findElement(REDUCE_TOOLBAR).click(); }
 

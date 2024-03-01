@@ -2,22 +2,14 @@ package tests;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.io.File;
-import java.time.Duration;
 
 @Log4j2
 public class EntriesTest extends BaseTest{
 
     @Test(description = "Create an entry with formatting")
     public void createEntryWithFormatting() {
-        log.info("Creating an entry with some formatting options included");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -41,7 +33,6 @@ public class EntriesTest extends BaseTest{
         creationPage.addNewline();
         creationPage.writeEntry(faker.friends().quote());
         creationPage.backToOverviewPage();
-
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -51,7 +42,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Add link")
     public void addLinkToNewEntry() {
-        log.info("Adding a link to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -59,6 +49,7 @@ public class EntriesTest extends BaseTest{
                 true,
                 "Login failed or create entry button was modified"
         );
+        log.info("Going to Creation page");
         entriesPage.goToCreationPage();
         Assert.assertEquals(
                 creationPage.isCreationPageOpened(),
@@ -83,7 +74,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Cancel link creation")
     public void cancelLinkCreationInNewEntry() {
-        log.info("Cancelling link from a Link modal on Entry Creation page");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -118,7 +108,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Remove link")
     public void removeLinkFromNewEntry() {
-        log.info("Deleting a link which was added to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -156,10 +145,9 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Add a picture")
     public void addPicture() {
-        log.info("Adding an image to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
+            Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
                 "Login failed or create entry button was modified"
@@ -192,10 +180,9 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Cancel a picture")
     public void cancelPicture() {
-        log.info("Cancelling image attachment to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
+            Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
                 "Login failed or create entry button was modified"
@@ -231,7 +218,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Remove a picture")
     public void removePicture() {
-        log.info("Removing an image which was added to an entry");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -273,10 +259,9 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Expand a toolbar")
     public void expandToolbar() {
-        log.info("Expanding a toolbar");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
+            Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
                 "Login failed or create entry button was modified"
@@ -302,7 +287,6 @@ public class EntriesTest extends BaseTest{
 
         @Test(description = "Reduce a toolbar")
         public void reduceToolbar() {
-        log.info("Reducing a toolbar");
             loginPage.open();
             loginPage.login(USER_EMAIL, USER_PASSWORD);
             Assert.assertEquals(
@@ -342,11 +326,10 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "CRUD a simple entry")
     public void crudEntry() {
-        log.info("Performing a high-level E2E for an entry");
         String entryText = faker.gameOfThrones().character();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
+            Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
                 "Login failed or create entry button was modified"
@@ -417,7 +400,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Search a created entry")
     public void searchForSingleEntry() {
-        log.info("Searching for a created entry with a single search result");
         String entryText = faker.dog().breed();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
@@ -461,7 +443,6 @@ public class EntriesTest extends BaseTest{
 
     @Test(description = "Search for non-existing entry")
     public void searchForNonExistingEntry() {
-        log.info("");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -525,5 +506,23 @@ public class EntriesTest extends BaseTest{
                 1,
                 "Saved entry is not found"
         );
+    }
+
+    @Test(description = "Go back to Entries page")
+    public void goBackToEntries() {
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.goToCreationPage();
+        Assert.assertEquals(
+                creationPage.isCreationPageOpened(),
+                true,
+                "Creation page is not opened"
+        );
+        creationPage.backToOverviewPage();
     }
 }

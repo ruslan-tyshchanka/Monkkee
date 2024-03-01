@@ -17,8 +17,8 @@ public class CleanupTest extends BaseTest{
         alert.accept();
     }
 
-    @Test(description = "Go home from Tags page")
-    public void goHomeFromTagsPage() {
+    @Test(description = "Delete all tags")
+    public void deleteAllTags() {
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -27,11 +27,21 @@ public class CleanupTest extends BaseTest{
                 "Login failed or create entry button was modified"
         );
         tagsPage.open();
-        tagsPage.backToOverview();
         Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "User is not on Homepage"
+                settingsPage.getPageTitle(),
+                "Manage Tags",
+                "Page is not opened"
         );
+        int numberOfTags = tagsPage.countTags();
+        if(numberOfTags>0) {
+            for (int i = 0; i < numberOfTags; i++) {
+                tagsPage.deleteTag(tagsPage.getFirstTagName());
+            }
+            Assert.assertEquals(
+                    tagsPage.countTags(),
+                    0,
+                    "Not all tags were deleted"
+            );
+        }
     }
 }

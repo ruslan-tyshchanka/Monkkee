@@ -18,7 +18,6 @@ public class HeaderFooterTest extends BaseTest {
 
     @Test(dataProvider = "headerNavigation", description = "Verify redirections of header buttons")
     public void goToSHeaderSection(String headerButton, String pageTitle) {
-        log.info("Verifying header redirections");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -48,7 +47,6 @@ public class HeaderFooterTest extends BaseTest {
 
         @Test(dataProvider = "footerNavigation", description = "Verify redirections of footer buttons")
         public void goToFooterSection(String footerButton, String relativeUrl) {
-            log.info("Verifying footer redirections");
             loginPage.open();
             entriesPage.clickOnFooter(footerButton);
             Assert.assertEquals(

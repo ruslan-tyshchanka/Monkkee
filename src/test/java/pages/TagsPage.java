@@ -1,11 +1,13 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class TagsPage extends BasePage{
 
 private final By MANAGE_TAGS_BUTTON = By.xpath("//*[text()='Manage tags']");
@@ -24,14 +26,19 @@ public TagsPage(WebDriver driver) {
     }
 
     public void open() {
+    log.info("Opening 'Manage Tags' page");
         driver.findElement(MANAGE_TAGS_BUTTON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(MANAGE_TAGS_HEADER));
 
     }
 
-    public int countTags() { return driver.findElements(TAG_ENTITY).size(); }
+    public int countTags() {
+        log.info("Counting tags on page");
+        return driver.findElements(TAG_ENTITY).size();
+}
 
     public void editTagName(String oldName, String newName) {
+        log.info("Editing tag name from '"+oldName+"' to '"+newName+"'");
         By EDIT_TAG = By.xpath(String.format(EDIT_TAG_BUTTON, oldName));
         driver.findElement(EDIT_TAG).click();
         driver.findElement(TAG_INPUT).clear();
@@ -40,11 +47,13 @@ public TagsPage(WebDriver driver) {
     }
 
     public int countTagsByName(String tagName) {
+        log.info("Counting number of tag with name "+tagName);
         By TAG_DISPLAYED = By.xpath(String.format(TAG_PRESENCE, tagName));
         return driver.findElements(TAG_DISPLAYED).size();
     }
 
     public void deleteTag(String tagName) {
+        log.info("Deleting tag "+tagName);
         By DELETE_TAG = By.xpath(String.format(DELETE_TAG_BUTTON, tagName));
         driver.findElement(DELETE_TAG).click();
         Alert alert = driver.switchTo().alert();
@@ -53,10 +62,12 @@ public TagsPage(WebDriver driver) {
     }
 
     public void backToOverview() {
+        log.info("Going back to Overview page");
         driver.findElement(BACK_TO_OVERVIEW_BUTTON).click();
     }
 
     public String getFirstTagName() {
+        log.info("Getting the name of the first tag");
         return driver.findElement(TAG_ENTITY_FIRST).getText();
     }
 }

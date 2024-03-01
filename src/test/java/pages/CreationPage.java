@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+@Log4j2
 public class CreationPage extends BasePage {
 
     private final By ENTRY_TEXTBOX = By.id("editable");
@@ -17,7 +19,6 @@ public class CreationPage extends BasePage {
     final String EXISTING_TAG = "//*[contains(@class, 'tag') and contains(text(),'%s')]";
     private final By AUTOMATIC_COLOR = By.cssSelector("[title='Automatic']");
     private final By BACK_TO_OVERVIEW = By.id("back-to-overview");
-    //private final By TAG_DROPDOWN_
     private final By LINK_ICON = By.xpath("//*[contains(@class, '_link_icon')]");
     private final By UNLINK_ICON = By.xpath("//*[contains(@class, '_unlink_icon')]");
     private final By LINK_MODAL = By.xpath("//*[contains(@class, 'dialog_body')]");
@@ -31,7 +32,6 @@ public class CreationPage extends BasePage {
     private final By REDUCE_TOOLBAR = By.xpath("//*[@title='Reduce toolbar']");
     private final By SAVE_BUTTON = By.xpath("//*[@title='Save']");
     private final By DELETE_ENTRY_BUTTON = By.id("delete-entry");
-    private final By NO_ENTRIES_FOUND = By.xpath("//*[contains(text(), 'No entries found')]");
 
 
     public CreationPage(WebDriver driver) {
@@ -39,19 +39,23 @@ public class CreationPage extends BasePage {
     }
 
     public boolean isCreationPageOpened() {
+        log.info("Checking if Entry Creation page is opened");
         return driver.findElement(ENTRY_TEXTBOX).isDisplayed();
     }
 
     public void clickFormatIcon(String formatType) {
+        log.info("Clicking on "+formatType+" formatting icon");
         By FORMAT_BUTTON = By.xpath(String.format(APPLY_FORMAT_BUTTON, formatType));
         driver.findElement(FORMAT_BUTTON).click();
     }
 
     public void writeEntry(String text) {
+        log.info("Writing an entry - "+text);
         driver.findElement(ENTRY_TEXTBOX).sendKeys(text);
     }
 
     public void changeColor(String colorTitle) {
+        log.info("Checking text color to "+colorTitle);
         By COLOR_OPTION = By.xpath(String.format(COLORBOX_OPTION, colorTitle));
         By TEXT_COLOR_ICON = By.xpath(String.format(APPLY_FORMAT_BUTTON, "Text Color"));
         driver.findElement(TEXT_COLOR_ICON).click();
@@ -61,6 +65,7 @@ public class CreationPage extends BasePage {
     }
 
     public void changeColorToDefault() {
+        log.info("Changing text color to default");
         By TEXT_COLOR_ICON = By.xpath(String.format(APPLY_FORMAT_BUTTON, "Text Color"));
         driver.findElement(TEXT_COLOR_ICON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
@@ -69,79 +74,115 @@ public class CreationPage extends BasePage {
     }
 
     public void addNewline() {
+        log.info("Adding a newline to an entry");
         driver.findElement(ENTRY_TEXTBOX).sendKeys(Keys.ENTER);
     }
 
     public void addTag(String tagName) {
+        log.info("Adding tag "+tagName);
         driver.findElement(TAG_NAME_INPUT).sendKeys(tagName);
         driver.findElement(ADD_TAG_BUTTON).click();
     }
 
     public int findTagByName(String tagName) {
+        log.info("Finding tag by name "+tagName);
         By EXISTING_TAG_NAME = By.xpath(String.format(EXISTING_TAG, tagName));
         return driver.findElements(EXISTING_TAG_NAME).size();
     }
 
     public void removeTag(String tagName) {
+        log.info("Removing tag "+tagName);
         By EXISTING_TAG_NAME = By.xpath(String.format(EXISTING_TAG, tagName));
         driver.findElement(EXISTING_TAG_NAME).click();
     }
 
     public void backToOverviewPage() {
+        log.info("Going back to Overview page");
         driver.findElement(BACK_TO_OVERVIEW).click();
     }
 
     public void openLinkModal() {
+        log.info("Opening link management modal");
         driver.findElement(LINK_ICON).click();
     }
 
-    public void removeLinksFromText() { driver.findElement(UNLINK_ICON).click(); }
+    public void removeLinksFromText() {
+        log.info("Removing all links from entry text");
+        driver.findElement(UNLINK_ICON).click(); }
 
     public int isLinkModalPresent() {
+        log.info("Checking if link management modal is opened");
         return driver.findElements(LINK_MODAL).size();
     }
 
     public void writeInLinkModal(String section, String text) {
+        log.info("Writing '"+text+"' in field '"+section+"'");
         By LINK_MODAL_INPUT = By.xpath(String.format(INPUT_LINK_MODAL, section));
         driver.findElement(LINK_MODAL_INPUT).sendKeys(text);
     }
 
     public void clickButtonInLinkModal(String button) {
+        log.info("Clicking '"+button+"' in link management modal");
         By LINK_MODAL_BUTTON = By.xpath(String.format(BUTTON_LINK_MODAL, button));
         driver.findElement(LINK_MODAL_BUTTON).click();
     };
 
     public int countLinksInTextbox(String linkText, String linkAddress) {
+        log.info("Counting number of links with text '"+linkText+"' and address '"+linkText+"'");
         By TEXTBOX_LINK = By.xpath(String.format(LINK_IN_TEXTBOX, linkText, linkAddress));
         return driver.findElements(TEXTBOX_LINK).size();
     }
 
-    public void clickAddImageIcon() { driver.findElement(IMAGE_ICON).click(); }
+    public void clickAddImageIcon() {
+        log.info("Clicking on Add Image icon");
+        driver.findElement(IMAGE_ICON).click();
+    }
 
-    public int findImageModalOpened() { return driver.findElements(IMAGE_MODAL).size(); }
+    public int findImageModalOpened() {
+        log.info("Checking if image management modal is opened");
+        return driver.findElements(IMAGE_MODAL).size();
+    }
 
-    public int countImageDisplayedInTextbox() { return driver.findElements(IMAGE_IN_TEXTBOX).size(); }
+    public int countImageDisplayedInTextbox() {
+        log.info("Counting images displayed in textbox");
+        return driver.findElements(IMAGE_IN_TEXTBOX).size();
+    }
 
-    public void removePictureFromTextbox() { driver.findElement(ENTRY_TEXTBOX).sendKeys(Keys.BACK_SPACE); }
+    public void removePictureFromTextbox() {
+        log.info("Removing a picture from an entry");
+        driver.findElement(ENTRY_TEXTBOX).sendKeys(Keys.BACK_SPACE);
+    }
 
     public void expandToolbar() {
+        log.info("Expanding a toolbar");
         wait.until(ExpectedConditions.visibilityOfElementLocated(EXPAND_TOOLBAR));
         driver.findElement(EXPAND_TOOLBAR).click(); }
 
-    public void reduceToolbar() { driver.findElement(REDUCE_TOOLBAR).click(); }
+    public void reduceToolbar() {
+        log.info("Reducing a toolbar");
+        driver.findElement(REDUCE_TOOLBAR).click();
+    }
 
-    public int findExpandToolbarIcon() { return driver.findElements(EXPAND_TOOLBAR).size(); }
+    public int findExpandToolbarIcon() {
+        log.info("Finding 'Expand Toolbar' icon");
+        return driver.findElements(EXPAND_TOOLBAR).size();
+    }
 
-    public int findReduceToolbarIcon() { return driver.findElements(REDUCE_TOOLBAR).size(); }
+    public int findReduceToolbarIcon() {
+        log.info("Finding 'Reduce Toolbar' icon");
+        return driver.findElements(REDUCE_TOOLBAR).size();
+    }
 
-    public void saveEntry() { driver.findElement(SAVE_BUTTON).click(); }
+    public void saveEntry() {
+        log.info("Saving an entry");
+        driver.findElement(SAVE_BUTTON).click();
+    }
 
     public void deleteEntry() {
+        log.info("Deleting an entry");
         driver.findElement(DELETE_ENTRY_BUTTON).click();
         Alert alert = driver.switchTo().alert();
         Assert.assertEquals(alert.getText(), "Do you really want to delete the entry?");
         alert.accept();
     }
-
-    public boolean isEntryDeleted() { return driver.findElement(NO_ENTRIES_FOUND).isDisplayed(); }
 }

@@ -39,6 +39,10 @@ Tags management:
 - Assign tags
 - Search by tags
 - Remove tags
+- Manage Tags page contains tags
+- Manage Tags page is accessible from Overview page
+- Tags can be edited
+- Tags can be deleted
 - Tags are displayed on home page
 - Tags are displayed on create an entry page
 

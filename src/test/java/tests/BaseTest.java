@@ -2,20 +2,17 @@ package tests;
 
 import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
 import utils.PropertyReader;
+import utils.TestListener;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -28,8 +25,8 @@ public class BaseTest {
     TagsPage tagsPage;
     Faker faker;
 
-    final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
-    final String USER_PASSWORD = System.getenv().getOrDefault("password", PropertyReader.getProperty("mnk.password"));
+    final String USER_EMAIL = System.getProperty("user", PropertyReader.getProperty("mnk.user"));;
+    final String USER_PASSWORD = System.getProperty("password", PropertyReader.getProperty("mnk.password"));
 
     final String BASE_URL = "https://monkkee.com";
     @Parameters({"browser"})

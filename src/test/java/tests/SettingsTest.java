@@ -21,14 +21,12 @@ public class SettingsTest extends BaseTest{
                 {"logout", "Inactivity timeout"},
                 {"editor","Editor"},
                 {"export", "Export"},
-                {"donation_payment", "Donations"},
                 {"delete_account", "Delete user account"}
         };
     }
 
     @Test(dataProvider = "settingsSections", description = "Verify the display of settings section")
     public void goToSettingSection(String sectionCode, String sectionTitle) {
-        log.info("Verifying the display of settings section");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(

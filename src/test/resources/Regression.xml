@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="1" name="Monkkee Regression" parallel="tests">
+<suite thread-count="2" name="Monkkee Regression" parallel="tests">
     <test name="Regression">
         <classes>
             <class name="tests.LoginTest"/>
@@ -8,6 +8,11 @@
             <class name="tests.HeaderFooterTest"/>
             <class name="tests.TagsTest"/>
             <class name="tests.SettingsTest"/>
+        </classes>
+    </test>
+    <test name="Cleanup">
+        <classes>
+            <class name="tests.CleanupTest"/>
         </classes>
     </test>
 </suite>

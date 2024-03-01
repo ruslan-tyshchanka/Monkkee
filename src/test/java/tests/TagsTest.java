@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 public class TagsTest extends BaseTest{
     @Test(description = "Assign tag")
     public void assignTags() {
-        log.info("Assigning a tag");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
@@ -33,7 +32,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Remove assigned tag")
     public void removeTag() {
-        log.info("Removing assigned tag");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
@@ -64,7 +62,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Verify assigned tag from Entries page")
     public void verifyTag() {
-        log.info("Verifying assigned tag from Entries page");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
@@ -107,7 +104,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Find existing tag")
     public void findTag() {
-        log.info("Editing tag name");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
@@ -153,7 +149,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Edit existing tag")
     public void editTag() {
-        log.info("Editing tag name");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         String tagNameUpd = faker.food().fruit();
         String entryText = faker.aviation().aircraft();
@@ -206,7 +201,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Delete tag by name")
     public void deleteTag() {
-        log.info("Deleting tag by name");
         String tagName = faker.country().name()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
@@ -253,7 +247,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Delete all tags")
     public void deleteAllTags() {
-        log.info("Deleting all tags");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -282,7 +275,6 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Go home from Tags page")
     public void goHomeFromTagsPage() {
-        log.info("Going to Homepage");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(

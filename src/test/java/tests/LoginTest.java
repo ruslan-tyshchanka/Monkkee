@@ -26,7 +26,6 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "loginData", description = "Login with empty/invalid credentials")
     public void loginWithInvalidCredentials(String user, String password) {
-        log.info("Logging in with invalid credentials");
         loginPage.open();
         loginPage.login(user, password);
         if (user == "") {
@@ -52,7 +51,6 @@ public class LoginTest extends BaseTest{
 
     @Test(description = "Login with valid credentials")
     public void successfulLogin() {
-        log.info("Logging in with valid credentials");
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -64,7 +62,6 @@ public class LoginTest extends BaseTest{
 
     @Test(description = "Open Send a reminder page")
     public void openReminderPage() {
-        log.info("Verifying section title on Send Password Reminder page");
         loginPage.open();
         loginPage.clickSendReminderButton();
         Assert.assertEquals(
@@ -76,7 +73,6 @@ public class LoginTest extends BaseTest{
 
     @Test(description = "Open Send a registration page")
     public void openRegistrationPage() {
-        log.info("Verifying section title on Registration page");
         loginPage.open();
         loginPage.clickRegisterButton();
         Assert.assertEquals(
@@ -97,7 +93,6 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "changeLanguage", description = "Change login page language")
     public void verifyLanguageByReminderText(String language, String expectedReminderText) {
-        log.info("Verifying page translation once language is reselected");
         loginPage.open();
         loginPage.switchLanguage(language);
         Assert.assertEquals(

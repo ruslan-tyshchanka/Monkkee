@@ -11,10 +11,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import pages.CreationPage;
-import pages.EntriesPage;
-import pages.LoginPage;
-import pages.SettingsPage;
+import pages.*;
 import utils.PropertyReader;
 
 import java.time.Duration;
@@ -28,6 +25,7 @@ public class BaseTest {
     EntriesPage entriesPage;
     CreationPage creationPage;
     SettingsPage settingsPage;
+    TagsPage tagsPage;
     Faker faker;
 
     final String USER_EMAIL = System.getenv().getOrDefault("user", PropertyReader.getProperty("mnk.user"));;
@@ -57,6 +55,7 @@ public class BaseTest {
         entriesPage = new EntriesPage(driver);
         creationPage = new CreationPage(driver);
         settingsPage = new SettingsPage(driver);
+        tagsPage = new TagsPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

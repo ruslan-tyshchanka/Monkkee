@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class EntriesPage extends BasePage{
 
@@ -10,7 +11,6 @@ public class EntriesPage extends BasePage{
     final String RECENT_ENTRY_BY_TAG = "//*[@class='tags']/span[contains(text(), '%s')]";
     final String HEADER_BUTTON_PATH = "//header//span[text()='%s']";
     final String FOOTER_BUTTON_PATH = "//footer//a[text()='%s']";
-    private final By SEARCH_SCROLL = By.xpath("//a[@custom-scroll-to='search']");
     private final By SEARCH_INPUT = By.xpath("//input[@type='search']");
     private final By SEARCH_BUTTON = By.xpath("//button[@title='Search']");
     private final By RESET_SEARCH = By.id("reset-search");
@@ -58,15 +58,21 @@ public class EntriesPage extends BasePage{
     }
 
     public void searchByText(String textToSearch) {
-        //if(driver.findElements(SEARCH_SCROLL).size()>0){
-        //    driver.findElement(SEARCH_SCROLL).click();
-        //}
         driver.findElement(SEARCH_INPUT).sendKeys(textToSearch);
-        driver.findElement(SEARCH_BUTTON);
+        driver.findElement(SEARCH_BUTTON).click();
     }
 
     public int getSearchedEntries(String textToSearch) {
         By SEARCH_BY_TEXT_RESULT = By.xpath(String.format(SEARCH_BY_TEXT_RESULTS, textToSearch));
         return driver.findElements(SEARCH_BY_TEXT_RESULT).size();
+    }
+
+    public int findNoEntriesMessage() {
+        return driver.findElements(NO_ENTRIES_MESSAGE).size();
+    }
+
+    public void resetSearch() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(RESET_SEARCH));
+        driver.findElement(RESET_SEARCH).click();
     }
 }

@@ -16,4 +16,22 @@ public class CleanupTest extends BaseTest{
         Assert.assertEquals(alert.getText(), "Do you really want to delete the selected entries?");
         alert.accept();
     }
+
+    @Test(description = "Go home from Tags page")
+    public void goHomeFromTagsPage() {
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        tagsPage.open();
+        tagsPage.backToOverview();
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "User is not on Homepage"
+        );
+    }
 }

@@ -357,8 +357,8 @@ public class EntriesTest extends BaseTest{
                 true,
                 "Creation page is not opened"
         );
-        creationPage.writeEntry(entryText);
         creationPage.expandToolbar();
+        creationPage.writeEntry(entryText);
         Assert.assertEquals(
                 creationPage.findReduceToolbarIcon(),
                 1,
@@ -409,108 +409,9 @@ public class EntriesTest extends BaseTest{
         );
         creationPage.deleteEntry();
         Assert.assertEquals(
-                creationPage.isEntryDeleted(),
-                true,
-                "Entry is still displayed"
-        );
-    }
-
-    @Test(description = "Assign tag")
-    public void assignTags() {
-        log.info("Assigning a tag");
-        String tagName = faker.country().name()+" "+faker.food().fruit();
-        loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Login failed or create entry button was modified"
-        );
-        entriesPage.goToCreationPage();
-        Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.addTag(tagName);
-        Assert.assertEquals(
-                creationPage.findTagByName(tagName),
-                1,
-                "Tag wasn't assigned"
-        );
-    }
-
-    @Test(description = "Remove assigned tag")
-    public void removeTag() {
-        log.info("Removing assigned tag");
-        String tagName = faker.country().name()+" "+faker.food().fruit();
-        loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Login failed or create entry button was modified"
-        );
-        entriesPage.goToCreationPage();
-        Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.addTag(tagName);
-        Assert.assertEquals(
-                creationPage.findTagByName(tagName),
-                1,
-                "Tag wasn't assigned"
-        );
-        creationPage.removeTag(tagName);
-        Assert.assertEquals(
-                creationPage.findTagByName(tagName),
+                entriesPage.findRecentEntryByText("UPD "+entryText),
                 0,
-                "Tag wasn't removed"
-        );
-    }
-
-    @Test(description = "Verify assigned tag from Entries page")
-    public void verifyTag() {
-        log.info("Verifying assigned tag from Entries page");
-        String tagName = faker.country().name()+" "+faker.food().fruit();
-        loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Login failed or create entry button was modified"
-        );
-        entriesPage.goToCreationPage();
-        Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.addTag(tagName);
-        Assert.assertEquals(
-                creationPage.findTagByName(tagName),
-                1,
-                "Tag wasn't assigned"
-        );
-        creationPage.expandToolbar();
-        Assert.assertEquals(
-                creationPage.findReduceToolbarIcon(),
-                1,
-                "Toolbar is not expanded"
-        );
-        creationPage.saveEntry();
-        creationPage.backToOverviewPage();
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Create entry button is not opened"
-        );
-        Assert.assertEquals(
-                entriesPage.findRecentEntryByTag(tagName),
-                1,
-                "Entry with specified tag is not found"
+                "Saved entry is not deleted"
         );
     }
 
@@ -558,10 +459,28 @@ public class EntriesTest extends BaseTest{
         );
     }
 
-    @Test(description = "Search created entries")
-    public void searchForSeveralEntry() {
-        log.info("Searching for a created entry with several search results");
-        String entryText = faker.cat().breed();
+    @Test(description = "Search for non-existing entry")
+    public void searchForNonExistingEntry() {
+        log.info("");
+        loginPage.open();
+        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        Assert.assertEquals(
+                entriesPage.isCreateEntryButtonPresent(),
+                true,
+                "Login failed or create entry button was modified"
+        );
+        entriesPage.searchByText(faker.harryPotter().house());
+        Assert.assertEquals(
+                entriesPage.findNoEntriesMessage(),
+                1,
+                "No entries message isn't found"
+        );
+    }
+
+    @Test(description = "Reset filter with empty search results")
+    public void resetFilterWithoutEntries() {
+        String searchParameter = faker.harryPotter().house();
+        String entryText = faker.superhero().name();
         loginPage.open();
         loginPage.login(USER_EMAIL, USER_PASSWORD);
         Assert.assertEquals(
@@ -576,7 +495,7 @@ public class EntriesTest extends BaseTest{
                 "Creation page is not opened"
         );
         creationPage.expandToolbar();
-        creationPage.writeEntry(entryText+" 1");
+        creationPage.writeEntry(entryText);
         Assert.assertEquals(
                 creationPage.findReduceToolbarIcon(),
                 1,
@@ -589,37 +508,22 @@ public class EntriesTest extends BaseTest{
                 true,
                 "Create entry button is not opened"
         );
-        entriesPage.searchByText(entryText);
         Assert.assertEquals(
-                entriesPage.getSearchedEntries(entryText),
+                entriesPage.findRecentEntryByText(entryText),
                 1,
-                "Entry is not found"
+                "Saved entry is not found"
         );
-        entriesPage.goToCreationPage();
+        entriesPage.searchByText(searchParameter);
         Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.expandToolbar();
-        creationPage.writeEntry(entryText+" 2");
-        Assert.assertEquals(
-                creationPage.findReduceToolbarIcon(),
+                entriesPage.findNoEntriesMessage(),
                 1,
-                "Toolbar is not expanded"
+                "No entries message isn't found"
         );
-        creationPage.saveEntry();
-        creationPage.backToOverviewPage();
+        entriesPage.resetSearch();
         Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Create entry button is not opened"
-        );
-        entriesPage.searchByText(entryText);
-        Assert.assertEquals(
-                entriesPage.getSearchedEntries(entryText),
-                2,
-                "Entry is not found"
+                entriesPage.findRecentEntryByText(entryText),
+                1,
+                "Saved entry is not found"
         );
     }
 }

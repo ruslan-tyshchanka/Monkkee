@@ -19,7 +19,7 @@ public class HeaderFooterTest extends BaseTest {
     @Test(dataProvider = "headerNavigation", description = "Verify redirections of header buttons")
     public void goToSHeaderSection(String headerButton, String pageTitle) {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

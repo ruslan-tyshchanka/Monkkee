@@ -10,7 +10,7 @@ public class TagsTest extends BaseTest{
     public void assignTags() {
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -34,7 +34,7 @@ public class TagsTest extends BaseTest{
     public void removeTag() {
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -64,7 +64,7 @@ public class TagsTest extends BaseTest{
     public void verifyTag() {
         String tagName = faker.country().name()+" "+faker.food().fruit();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -107,7 +107,7 @@ public class TagsTest extends BaseTest{
         String tagName = faker.country().name()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -153,7 +153,7 @@ public class TagsTest extends BaseTest{
         String tagNameUpd = faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -204,7 +204,7 @@ public class TagsTest extends BaseTest{
         String tagName = faker.country().name()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -248,7 +248,7 @@ public class TagsTest extends BaseTest{
     @Test(description = "Delete all tags")
     public void deleteAllTags() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -276,7 +276,7 @@ public class TagsTest extends BaseTest{
     @Test(description = "Go home from Tags page")
     public void goHomeFromTagsPage() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

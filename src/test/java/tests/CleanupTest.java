@@ -9,7 +9,7 @@ public class CleanupTest extends BaseTest{
     @Test(description = "Clening up test data")
     public void cleanupEntries() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         driver.findElement(By.xpath("//input[@title='Select all']")).click();
         driver.findElement(By.xpath("//a[@title='Delete selected entries']")).click();
         Alert alert = driver.switchTo().alert();
@@ -20,7 +20,7 @@ public class CleanupTest extends BaseTest{
     @Test(description = "Delete all tags")
     public void deleteAllTags() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

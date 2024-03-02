@@ -28,7 +28,7 @@ public class SettingsTest extends BaseTest{
     @Test(dataProvider = "settingsSections", description = "Verify the display of settings section")
     public void goToSettingSection(String sectionCode, String sectionTitle) {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

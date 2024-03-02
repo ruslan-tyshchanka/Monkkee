@@ -15,11 +15,11 @@ public class LoginTest extends BaseTest{
     @DataProvider
     public Object[][] loginData() {
         return new Object[][]{
-                {"", USER_PASSWORD},
-                {USER_EMAIL, ""},
+                {"", validPassword},
+                {validUser, ""},
                 {"", ""},
-                {"test@test.com", USER_PASSWORD},
-                {USER_EMAIL, "123456"},
+                {"test@test.com", validPassword},
+                {validUser, "123456"},
                 {"test@test.com", "123456"}
         };
     }
@@ -40,7 +40,7 @@ public class LoginTest extends BaseTest{
                     ERROR_MESSAGE_FOR_EMPTY_FIELD,
                     "Error message is not displayed for empty password"
             );
-        } else if (user != USER_EMAIL && user != "" || password != USER_PASSWORD && password != "") {
+        } else if (user != validUser && user != "" || password != validPassword && password != "") {
             Assert.assertEquals(
                     loginPage.returnLoginError(),
                     ERROR_MESSAGE_FOR_INVALID_CREDENTIALS,
@@ -52,7 +52,7 @@ public class LoginTest extends BaseTest{
     @Test(description = "Login with valid credentials")
     public void successfulLogin() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

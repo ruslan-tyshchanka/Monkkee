@@ -28,10 +28,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run BVT
-      run: mvn clean test -DsuiteXmlFile='src/test/resources/BVT.xml' -Duser=$USER_EMAIL -Dpassword=$USER_PASSWORD
+      run: mvn clean test -DsuiteXmlFile='src/test/resources/BVT.xml' -Duser=$USER -Dpassword=$PASSWORD
       env:
-        USER_EMAIL: ${{ secrets.USER_EMAIL }}
-        USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        USER: ${{ secrets.MNK_EMAIL }}
+        PASSWORD: ${{ secrets.MNK_PASSWORD }}
 
     - name: Load test report history
       uses: actions/checkout@v3

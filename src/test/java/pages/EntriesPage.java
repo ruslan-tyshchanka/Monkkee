@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Log4j2
 public class EntriesPage extends BasePage{
 
-    private final By CREATE_ENTRY_BUTTON = By.cssSelector("[title='Create an entry']");
+    private final By CREATE_ENTRY_BUTTON = By.id("create-entry");
     final String RECENT_ENTRY_RECORD = "(//*[text()='%s']/parent::*[@class='entry'])[1]";
     final String RECENT_ENTRY_BY_TAG = "//*[@class='tags']/span[contains(text(), '%s')]";
     final String HEADER_BUTTON_PATH = "//header//span[text()='%s']";

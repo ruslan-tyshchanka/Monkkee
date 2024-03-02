@@ -11,7 +11,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Create an entry with formatting")
     public void createEntryWithFormatting() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -43,7 +43,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Add link")
     public void addLinkToNewEntry() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -75,7 +75,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Cancel link creation")
     public void cancelLinkCreationInNewEntry() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -109,7 +109,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Remove link")
     public void removeLinkFromNewEntry() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -146,7 +146,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Add a picture")
     public void addPicture() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
             Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -181,7 +181,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Cancel a picture")
     public void cancelPicture() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
             Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -219,7 +219,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Remove a picture")
     public void removePicture() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -260,7 +260,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Expand a toolbar")
     public void expandToolbar() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
             Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -288,7 +288,7 @@ public class EntriesTest extends BaseTest{
         @Test(description = "Reduce a toolbar")
         public void reduceToolbar() {
             loginPage.open();
-            loginPage.login(USER_EMAIL, USER_PASSWORD);
+            loginPage.login(validUser, validPassword);
             Assert.assertEquals(
                     entriesPage.isCreateEntryButtonPresent(),
                     true,
@@ -328,7 +328,7 @@ public class EntriesTest extends BaseTest{
     public void crudEntry() {
         String entryText = faker.gameOfThrones().character();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
             Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -402,7 +402,7 @@ public class EntriesTest extends BaseTest{
     public void searchForSingleEntry() {
         String entryText = faker.dog().breed();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -444,7 +444,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Search for non-existing entry")
     public void searchForNonExistingEntry() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -463,7 +463,7 @@ public class EntriesTest extends BaseTest{
         String searchParameter = faker.harryPotter().house();
         String entryText = faker.superhero().name();
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,
@@ -511,7 +511,7 @@ public class EntriesTest extends BaseTest{
     @Test(description = "Go back to Entries page")
     public void goBackToEntries() {
         loginPage.open();
-        loginPage.login(USER_EMAIL, USER_PASSWORD);
+        loginPage.login(validUser, validPassword);
         Assert.assertEquals(
                 entriesPage.isCreateEntryButtonPresent(),
                 true,

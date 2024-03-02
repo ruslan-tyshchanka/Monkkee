@@ -25,8 +25,8 @@ public class BaseTest {
     TagsPage tagsPage;
     Faker faker;
 
-    final String USER_EMAIL = System.getProperty("user", PropertyReader.getProperty("mnk.user"));;
-    final String USER_PASSWORD = System.getProperty("password", PropertyReader.getProperty("mnk.password"));
+    String validUser = System.getProperty("user", PropertyReader.getProperty("mnk.user"));
+    String validPassword = System.getProperty("password", PropertyReader.getProperty("mnk.password"));
 
     final String BASE_URL = "https://monkkee.com";
     @Parameters({"browser"})

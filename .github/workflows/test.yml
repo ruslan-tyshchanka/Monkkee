@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run BVT
-      run: mvn clean test -DsuiteXmlFile='src/test/resources/BVT.xml' -Duser=$USER -Dpassword=$PASSWORD
+      run: mvn clean test -DsuiteXmlFile='src/test/resources/Regression.xml' -Duser=$USER -Dpassword=$PASSWORD
       env:
         USER: ${{ secrets.MNK_EMAIL }}
         PASSWORD: ${{ secrets.MNK_PASSWORD }}

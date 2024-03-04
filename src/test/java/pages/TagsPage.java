@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -25,6 +26,7 @@ public TagsPage(WebDriver driver) {
         super(driver);
     }
 
+    @Step("Open Tags management page")
     public void open() {
     log.info("Opening 'Manage Tags' page");
         driver.findElement(MANAGE_TAGS_BUTTON).click();
@@ -32,11 +34,13 @@ public TagsPage(WebDriver driver) {
 
     }
 
+    @Step("Count tags")
     public int countTags() {
         log.info("Counting tags on page");
         return driver.findElements(TAG_ENTITY).size();
 }
 
+@Step("Edit tag name")
     public void editTagName(String oldName, String newName) {
         log.info("Editing tag name from '"+oldName+"' to '"+newName+"'");
         By EDIT_TAG = By.xpath(String.format(EDIT_TAG_BUTTON, oldName));
@@ -46,12 +50,14 @@ public TagsPage(WebDriver driver) {
         driver.findElement(SUBMIT_BUTTON).click();
     }
 
+    @Step("Count tags by name")
     public int countTagsByName(String tagName) {
         log.info("Counting number of tag with name "+tagName);
         By TAG_DISPLAYED = By.xpath(String.format(TAG_PRESENCE, tagName));
         return driver.findElements(TAG_DISPLAYED).size();
     }
 
+    @Step("Delete tag")
     public void deleteTag(String tagName) {
         log.info("Deleting tag "+tagName);
         By DELETE_TAG = By.xpath(String.format(DELETE_TAG_BUTTON, tagName));
@@ -61,11 +67,13 @@ public TagsPage(WebDriver driver) {
         alert.accept();
     }
 
+    @Step("Back to overview page")
     public void backToOverview() {
         log.info("Going back to Overview page");
         driver.findElement(BACK_TO_OVERVIEW_BUTTON).click();
     }
 
+    @Step("Get first tag name")
     public String getFirstTagName() {
         log.info("Getting the name of the first tag");
         return driver.findElement(TAG_ENTITY_FIRST).getText();

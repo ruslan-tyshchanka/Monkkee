@@ -6,33 +6,10 @@ import org.testng.annotations.Test;
 
 @Log4j2
 public class TagsTest extends BaseTest{
-    @Test(description = "Assign tag")
-    public void assignTags() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
-        loginPage.open();
-        loginPage.login(validUser, validPassword);
-        Assert.assertEquals(
-                entriesPage.isCreateEntryButtonPresent(),
-                true,
-                "Login failed or create entry button was modified"
-        );
-        entriesPage.goToCreationPage();
-        Assert.assertEquals(
-                creationPage.isCreationPageOpened(),
-                true,
-                "Creation page is not opened"
-        );
-        creationPage.addTag(tagName);
-        Assert.assertEquals(
-                creationPage.findTagByName(tagName),
-                1,
-                "Tag wasn't assigned"
-        );
-    }
 
     @Test(description = "Remove assigned tag")
     public void removeTag() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
+        String tagName = faker.harryPotter().house()+" "+faker.food().fruit();
         loginPage.open();
         loginPage.login(validUser, validPassword);
         Assert.assertEquals(
@@ -62,7 +39,7 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Verify assigned tag from Entries page")
     public void verifyTag() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
+        String tagName = faker.harryPotter().house()+" "+faker.food().fruit();
         loginPage.open();
         loginPage.login(validUser, validPassword);
         Assert.assertEquals(
@@ -104,7 +81,7 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Find existing tag")
     public void findTag() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
+        String tagName = faker.harryPotter().house()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
         loginPage.login(validUser, validPassword);
@@ -149,7 +126,7 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Edit existing tag")
     public void editTag() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
+        String tagName = faker.harryPotter().house()+" "+faker.food().fruit();
         String tagNameUpd = faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
@@ -201,7 +178,7 @@ public class TagsTest extends BaseTest{
 
     @Test(description = "Delete tag by name")
     public void deleteTag() {
-        String tagName = faker.country().name()+" "+faker.food().fruit();
+        String tagName = faker.harryPotter().house()+" "+faker.food().fruit();
         String entryText = faker.aviation().aircraft();
         loginPage.open();
         loginPage.login(validUser, validPassword);

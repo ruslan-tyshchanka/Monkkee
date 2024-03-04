@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,18 +21,22 @@ public class SettingsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Select settings section {sectionCode}")
     public void selectSettingSection(String sectionCode) {
         log.info("Selecting setting section "+sectionCode);
         By SETTING_SECTION = By.xpath(String.format(SETTING_SECTION_LINK, sectionCode));
         driver.findElement(SETTING_SECTION).click();
     }
 
+    @Step("Wait for page title")
     public void waitForPageTitle(String pageTitle) {
         log.info("Waiting for page title '"+pageTitle+"' to appear");
         By SETTING_SECTION_NAME = By.xpath(String.format(SETTING_SECTION_TITLE, pageTitle));
         wait.until(ExpectedConditions.visibilityOfElementLocated(SETTING_SECTION_NAME));
 
     }
+
+    @Step("Get page title")
     public String getPageTitle() {
         log.info("Getting page title");
         return driver.findElement(PAGE_TITLE).getText();
